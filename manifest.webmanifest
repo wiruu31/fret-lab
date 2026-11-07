@@ -1,13 +1,13 @@
 {
-  "name": "FredLab",
-  "short_name": "FredLab",
+  "name": "FretLab",
+  "short_name": "FretLab",
   "description": "Pustaka chord, tuner, dan chord + lirik untuk main gitar dan ukulele.",
-  "start_url": "fredlab.html",
+  "start_url": "fretlab.html",
   "scope": "./",
   "display": "standalone",
   "orientation": "portrait",
-  "background_color": "#0E0F12",
-  "theme_color": "#0E0F12",
+  "background_color": "#050D17",
+  "theme_color": "#050D17",
   "lang": "id",
   "icons": [
     { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },

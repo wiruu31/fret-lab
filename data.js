@@ -1,5 +1,5 @@
 /* ================================================================
-   DATA.JS - TEORI MUSIK, DATA BAWAAN, MESIN CHORD  [FredLab v1.0.0]
+   DATA.JS - TEORI MUSIK, DATA BAWAAN, MESIN CHORD  [FretLab v1.1.0]
    Isi file ini: nama nada, jenis chord, daftar tuning, lagu contoh,
    dan "mesin" yang mencari bentuk jari (voicing) untuk tiap chord.
    File ini TIDAK menyentuh tampilan (DOM) dan TIDAK menyimpan data.
@@ -14,19 +14,20 @@
 /* ===== KONSTANTA START =====
    Nama app, warna tema, nama nada, dan instrumen.
    ================================================================ */
-const NAMA_APP = "FredLab";
-const VERSI_APP = "1.0.0";
+const NAMA_APP = "FretLab";
+const VERSI_APP = "1.1.0";
 
 const MODE_TEMA = ["auto", "terang", "gelap"];
 
-/* Pilihan warna tema (bukan hijau). Bisa juga pilih warna bebas. */
+/* Pilihan warna tema (bawaan Samudra). Bisa juga pilih warna bebas. */
 const PRESET_WARNA = [
-  { id: "biru",   nama: "Biru",   hex: "#3B82F6" },
-  { id: "oranye", nama: "Oranye", hex: "#F97316" },
-  { id: "ungu",   nama: "Ungu",   hex: "#8B5CF6" },
-  { id: "merah",  nama: "Merah",  hex: "#EF4444" },
-  { id: "kuning", nama: "Kuning", hex: "#EAB308" },
-  { id: "teal",   nama: "Teal",   hex: "#14B8A6" }
+  { id: "samudra", nama: "Samudra", hex: "#38BDF8" },
+  { id: "navy",    nama: "Tech Navy", hex: "#60A5FA" },
+  { id: "ungu",    nama: "Ungu Malam", hex: "#A78BFA" },
+  { id: "senja",   nama: "Senja",  hex: "#FB923C" },
+  { id: "merah",   nama: "Merah",  hex: "#F87171" },
+  { id: "kuning",  nama: "Kuning", hex: "#FACC15" },
+  { id: "teal",    nama: "Teal",   hex: "#2DD4BF" }
 ];
 
 const NADA_SHARP = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];

@@ -1,5 +1,5 @@
 /* ================================================================
-   APP.JS - OTAK APLIKASI (PENGHUBUNG)  [FredLab v1.0.0]
+   APP.JS - OTAK APLIKASI (PENGHUBUNG)  [FretLab v1.1.0]
    Tugas file ini: menyimpan "keadaan" aplikasi (tab aktif, pilihan
    chord, lagu yang dibuka), memasang semua event (klik, submit),
    membuka form, menjalankan tuner dan auto scroll, lalu memanggil
@@ -476,7 +476,7 @@ function unduh(namaFile, teks, mime) {
 }
 
 async function eksporJSON() {
-  unduh("fredlab-" + hariIni() + ".json", await Data.eksporJSON(), "application/json");
+  unduh("fretlab-" + hariIni() + ".json", await Data.eksporJSON(), "application/json");
   toast("cadangan JSON diunduh");
 }
 

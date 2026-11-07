@@ -1,5 +1,5 @@
 /* ================================================================
-   HALAMAN.JS - MENGGAMBAR SEMUA HALAMAN  [FredLab v1.0.0]
+   HALAMAN.JS - MENGGAMBAR SEMUA HALAMAN  [FretLab v1.1.0]
    Tiap fungsi render menerima data (dan pilihan) lalu mengisi HTML
    ke wadahnya. File ini TIDAK menyimpan data dan TIDAK memasang
    event (itu tugas storage.js dan app.js).

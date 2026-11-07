@@ -1,5 +1,5 @@
 /* ================================================================
-   STORAGE.JS - URUSAN DATA (SIMPAN / AMBIL)  [FredLab v1.0.0]
+   STORAGE.JS - URUSAN DATA (SIMPAN / AMBIL)  [FretLab v1.1.0]
    Semua akses data aplikasi lewat objek "Data" di file ini.
    File lain (ui.js, halaman.js, app.js) TIDAK menyentuh localStorage.
 
@@ -19,7 +19,8 @@
 /* ===== HELPER START =====
    Fungsi kecil pendukung. Tidak perlu diedit.
    ================================================================ */
-const KUNCI_DATA = "fredlab.v1";
+const KUNCI_DATA = "fretlab.v1";
+const KUNCI_LAMA = "fredlab.v1";   // nama lama (v1.0.0): data otomatis dipindah saat pertama dibuka
 
 function buatId() {
   if (window.crypto && window.crypto.randomUUID) return window.crypto.randomUUID();
@@ -155,6 +156,10 @@ const Data = {
 
     let teks = null;
     try { teks = localStorage.getItem(KUNCI_DATA); } catch (e) { /* diblokir */ }
+    /* Belum ada data baru tapi ada data dari v1.1.0 (FretLab): pakai itu */
+    if (!teks) {
+      try { teks = localStorage.getItem(KUNCI_LAMA); } catch (e) { /* diblokir */ }
+    }
 
     if (teks) {
       try {

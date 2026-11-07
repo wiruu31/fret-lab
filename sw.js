@@ -1,14 +1,14 @@
 /* ================================================================
-   SW.JS - SERVICE WORKER  [FredLab v1.0.0]
+   SW.JS - SERVICE WORKER  [FretLab v1.1.0]
    Menyimpan file aplikasi di cache agar bisa dibuka tanpa internet.
    Strategi: cache dulu, lalu perbarui di latar belakang.
    Naikkan VERSI_CACHE setiap kali ada file yang diubah.
    ================================================================ */
-const VERSI_CACHE = "fredlab-v1.0.0";
+const VERSI_CACHE = "fretlab-v1.1.0-3";
 const FILE_APP = [
   "./",
-  "fredlab.html",
-  "fredlab.css",
+  "fretlab.html",
+  "fretlab.css",
   "data.js",
   "storage.js",
   "audio.js",
@@ -46,7 +46,7 @@ self.addEventListener("fetch", (e) => {
           caches.open(VERSI_CACHE).then((c) => c.put(req, salinan));
         }
         return res;
-      }).catch(() => tersimpan || caches.match("fredlab.html"));
+      }).catch(() => tersimpan || caches.match("fretlab.html"));
       return tersimpan || jaringan;
     })
   );

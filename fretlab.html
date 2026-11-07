@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="id" data-tema="gelap">
+<head>
+  <!-- ===== HEAD START =====
+       File yang dipakai (semua satu folder): fretlab.css, data.js,
+       storage.js, audio.js, ui.js, halaman.js, app.js,
+       manifest.webmanifest, sw.js, dan folder icons/
+       ============================================================ -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#050D17">
+  <meta name="color-scheme" content="dark light">
+  <meta name="description" content="FretLab: pustaka chord, tuner, dan chord + lirik untuk main gitar dan ukulele.">
+
+  <!-- Aplikasi yang bisa dipasang (PWA) -->
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="FretLab">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+  <title>FretLab</title>
+  <link rel="icon" type="image/svg+xml" href="icons/icon.svg">
+
+  <link rel="stylesheet" href="fretlab.css">
+  <!-- ===== HEAD END ===== -->
+</head>
+<body>
+
+  <!-- ===== NAVIGASI START =====
+       Bawah layar di HP, samping kiri di layar lebar.
+       data-tab harus sama dengan id "view-..." di bawah.
+       ============================================================ -->
+  <nav class="nav" aria-label="Menu utama">
+
+    <button type="button" class="nav-btn is-active" data-aksi="tab" data-tab="chord" aria-current="page">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="1.5"/><path d="M9.7 3v18M14.3 3v18M5 9h14M5 15h14"/></svg><span>Chord</span></button>
+    <button type="button" class="nav-btn" data-aksi="tab" data-tab="tuner" aria-current="false">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 17a8 8 0 0 1 16 0M12 17l4-6"/><circle cx="12" cy="17" r="1"/></svg><span>Tuner</span></button>
+    <button type="button" class="nav-btn" data-aksi="tab" data-tab="lagu" aria-current="false">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18V5l10-2v13"/><circle cx="6.5" cy="18" r="2.5"/><circle cx="16.5" cy="16" r="2.5"/></svg><span>Lagu</span></button>
+    <button type="button" class="nav-btn" data-aksi="tab" data-tab="pengaturan" aria-current="false">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h9m4 0h3M4 17h3m4 0h9M13 7a2 2 0 1 0 4 0 2 2 0 0 0-4 0ZM7 17a2 2 0 1 0 4 0 2 2 0 0 0-4 0Z"/></svg><span>Atur</span></button>
+  </nav>
+  <!-- ===== NAVIGASI END ===== -->
+
+
+  <div class="isi-app">
+
+    <!-- ===== HEADER START =====
+         Judul halaman. Saat membuka lagu, muncul tombol kembali
+         dan logo disembunyikan (diatur app.js -> perbaruiHeader).
+         ============================================================ -->
+    <header class="app-header">
+      <button type="button" class="icon-btn" id="btnKembali" data-aksi="lagu-kembali" aria-label="Kembali ke daftar lagu" hidden>&lsaquo;</button>
+      <div class="app-title"><img class="logo" src="icons/icon.svg" alt="" width="32" height="32"><span id="judulHalaman">Chord</span></div>
+      <span class="app-versi muted">v1.1.0</span>
+    </header>
+    <!-- ===== HEADER END ===== -->
+
+
+    <main>
+      <!-- ===== HALAMAN START =====
+           Isi digambar oleh halaman.js.
+           ============================================================ -->
+      <section class="view is-active" id="view-chord"><div id="isi-chord"></div></section>
+      <section class="view" id="view-tuner"><div id="isi-tuner"></div></section>
+      <section class="view" id="view-lagu"><div id="isi-lagu"></div></section>
+      <section class="view" id="view-pengaturan"><div id="isi-pengaturan"></div></section>
+      <!-- ===== HALAMAN END ===== -->
+
+
+      <!-- ===== FOOTER START =====
+           Hak cipta. Tahun diisi otomatis oleh app.js.
+           ============================================================ -->
+      <footer class="footer">
+        <p>&copy; <span id="tahunCopyright">2026</span> Muh Geris Wiruno Mandawa. Semua hak dilindungi.</p>
+        <p class="footer-kecil">Data tersimpan di perangkat ini saja.</p>
+      </footer>
+      <!-- ===== FOOTER END ===== -->
+    </main>
+  </div>
+
+  <!-- Tombol + (hanya di daftar lagu; diatur app.js) -->
+  <button type="button" class="fab" id="fabTambah" data-aksi="fab" aria-label="Tambah lagu" hidden>+</button>
+
+
+  <!-- ===== DIALOG START =====
+       #dialogChord : detail chord & variasi bentuk jari.
+       #dialogUmum  : form serbaguna (lagu, tuning baru).
+       ============================================================ -->
+  <dialog class="sheet" id="dialogChord" aria-label="Detail chord">
+    <div id="isiChord"></div>
+  </dialog>
+
+  <dialog class="sheet" id="dialogUmum" aria-labelledby="judulUmum">
+    <form id="formUmum" method="dialog" autocomplete="off">
+      <h2 class="sheet-title" id="judulUmum"></h2>
+      <p class="hint" id="infoUmum" hidden></p>
+      <div id="isiUmum"></div>
+      <div class="sheet-actions">
+        <button type="button" class="btn btn--danger" id="btnHapusUmum" data-aksi="hapus-umum" hidden>hapus</button>
+        <button type="button" class="btn" data-aksi="tutup-dialog">batal</button>
+        <button type="submit" class="btn btn--solid" id="btnSimpanUmum">simpan</button>
+      </div>
+    </form>
+  </dialog>
+  <!-- ===== DIALOG END ===== -->
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <input type="file" id="inputImpor" accept="application/json,.json" hidden>
+
+  <!-- Urutan WAJIB: data -> storage -> audio -> ui -> halaman -> app -->
+  <script src="data.js"></script>
+  <script src="storage.js"></script>
+  <script src="audio.js"></script>
+  <script src="ui.js"></script>
+  <script src="halaman.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

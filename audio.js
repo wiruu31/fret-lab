@@ -1,5 +1,5 @@
 /* ================================================================
-   AUDIO.JS - MIKROFON, DETEKSI NADA, NADA ACUAN  [FredLab v1.0.0]
+   AUDIO.JS - MIKROFON, DETEKSI NADA, NADA ACUAN  [FretLab v1.1.0]
    Dipakai oleh Tuner. File ini hanya mengurus suara:
    - deteksiPitch : mengubah rekaman pendek menjadi frekuensi (Hz)
                     memakai algoritma YIN

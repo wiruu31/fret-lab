@@ -1,5 +1,5 @@
 /* ================================================================
-   UI.JS - HELPER, DIAGRAM CHORD, PEMBACA LAGU, TEMA  [FredLab v1.0.0]
+   UI.JS - HELPER, DIAGRAM CHORD, PEMBACA LAGU, TEMA  [FretLab v1.1.0]
    Isi file ini: pencari elemen, format angka, penggambar diagram
    chord (SVG murni), pengurai teks lagu + transpose, dan penerap tema.
    File ini TIDAK menyimpan data dan TIDAK memasang event.
@@ -55,7 +55,7 @@ function tuningAktif(data) {
 /* ===== DIAGRAM START =====
    Diagram chord SVG. frets = [null | 0 | 1..] dari senar terbawah.
    null = tidak dibunyikan (x), 0 = senar kosong (o).
-   Warna diatur lewat class .cd-* di fredlab.css.
+   Warna diatur lewat class .cd-* di fretlab.css.
    ================================================================ */
 function chordSVG(v, jumlahSenar) {
   const n = jumlahSenar;
@@ -238,6 +238,6 @@ function terapkanTema(p) {
   root.style.setProperty("--aksen", p.aksen);
   root.style.setProperty("--aksen-teks", luminan(p.aksen) > 0.4 ? "#0B0D10" : "#FFFFFF");
   const meta = document.querySelector('meta[name="theme-color"]');
-  if (meta) meta.setAttribute("content", gelap ? "#0E0F12" : "#F3F4F6");
+  if (meta) meta.setAttribute("content", gelap ? "#050D17" : "#EAF0F9");
 }
 /* ===== TEMA END ===== */
