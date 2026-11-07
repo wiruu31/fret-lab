@@ -121,12 +121,37 @@ function chordSVG(v, jumlahSenar) {
 const LABEL_BAGIAN = /^(intro|int|interlude|inter|reff?|refrain|reffrain|chorus|verse|bridge|outro|coda|ending|solo|bait|prechorus|pre-chorus|pre|instrumental|inst|musik|ref)\.?:?$/i;
 const FILLER = /^[.\-–—|:~*()\[\]xX×0-9,;]+$/;
 
-/* Memecah baris menjadi kata + posisi kolom awalnya */
+/* Memecah baris menjadi kata + posisi kolom awalnya.
+   Chord yang ditulis menempel dengan tanda "-" (misal "C-G/B", "Gsus4-G",
+   "C-Dm-Em") dipecah menjadi beberapa chord, dan tiap bagian diberi
+   nempel = true supaya tetap menempel saat ditranspose. */
+function pecahMenempel(teks) {
+  const potong = [];
+  let awal = 0;
+  for (let i = 1; i < teks.length; i++) {
+    if (teks[i] === "-" && /[A-G]/.test(teks[i + 1] || "") && teks[i - 1] !== "(" && teks[i - 1] !== "-") {
+      potong.push(teks.slice(awal, i));
+      awal = i;
+    }
+  }
+  if (!potong.length) return null;
+  potong.push(teks.slice(awal));
+  return potong.every((p) => uraiToken(p)) ? potong : null;
+}
+
 function pecahKata(baris) {
   const hasil = [];
   const re = /\S+/g;
   let m;
-  while ((m = re.exec(baris)) !== null) hasil.push({ teks: m[0], mulai: m.index });
+  while ((m = re.exec(baris)) !== null) {
+    const bagian = pecahMenempel(m[0]);
+    if (!bagian) { hasil.push({ teks: m[0], mulai: m.index }); continue; }
+    let pos = m.index;
+    bagian.forEach((p, i) => {
+      hasil.push({ teks: p, mulai: pos, nempel: i > 0 });
+      pos += p.length;
+    });
+  }
   return hasil;
 }
 
@@ -142,7 +167,7 @@ function klasifikasiBaris(baris) {
     const c = uraiToken(k.teks);
     if (c) { k.chord = c; adaChord++; }
     else if (i === 0 && LABEL_BAGIAN.test(k.teks)) k.label = true;
-    else if (FILLER.test(k.teks)) k.filler = true;
+    else if (FILLER.test(k.teks) || /^\[[^\]]*\]$/.test(k.teks)) k.filler = true;
     else bukan++;
   });
 
@@ -176,7 +201,8 @@ function olahBaris(baris, n) {
       teks = g.teks;
     }
     let jarak = kata.mulai - polos.length;
-    if (polos.length && jarak < 1) jarak = 1;
+    if (kata.nempel) jarak = 0;
+    else if (polos.length && jarak < 1) jarak = 1;
     if (jarak > 0) { polos += " ".repeat(jarak); html += " ".repeat(jarak); }
     polos += teks;
     if (g) {
