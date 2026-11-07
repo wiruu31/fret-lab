@@ -4,7 +4,7 @@
    Strategi: cache dulu, lalu perbarui di latar belakang.
    Naikkan VERSI_CACHE setiap kali ada file yang diubah.
    ================================================================ */
-const VERSI_CACHE = "fretlab-v1.1.0-4";
+const VERSI_CACHE = "fretlab-v1.1.0-5";
 const FILE_APP = [
   "./",
   "fretlab.html",

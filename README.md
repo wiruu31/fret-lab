@@ -10,6 +10,7 @@ Web app (PWA) untuk main gitar dan ukulele: **pustaka chord**, **tuner**, dan **
 - Logo: not balok (kembali ke gaya awal) dengan warna Samudra dan gradasi cahaya.
 - Data lagu dari v1.0.0 otomatis dipindahkan saat FretLab pertama dibuka di browser/alamat yang sama.
 - Perbaikan: chord yang ditulis menempel dengan tanda "-" (misal C-G/B, Gsus4-G, C-Dm-Em) sekarang dikenali, bisa diketuk, dan ikut transpose.
+- Perbaikan: baris chord dengan titik pemisah (Am..F..Am..F), label "Music :", dan chord dengan kurung/tanda "-" setelah titik kini terbaca sebagai chord.
 
 ## Fitur
 - **Chord**: semua nada dasar (C, C#, D, ... B) x 29 jenis chord (mayor, minor, 5, dim, aug, sus2, sus4, 7sus4, 7, maj7, m7, mMaj7, dim7, m7b5, 7#5, 7b5, 6, m6, 69, add9, madd9, 9, maj9, m9, 11, m11, 13, 7b9, 7#9). Gitar dan ukulele, banyak variasi bentuk jari per chord, pencarian (Am7, F#m, sus), dan favorit.

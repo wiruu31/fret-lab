@@ -118,18 +118,20 @@ function chordSVG(v, jumlahSenar) {
    "Intro :" dan tanda seperti ".." atau "(x2)").
    Transpose menggeser tiap chord tanpa merusak posisi kolomnya.
    ================================================================ */
-const LABEL_BAGIAN = /^(intro|int|interlude|inter|reff?|refrain|reffrain|chorus|verse|bridge|outro|coda|ending|solo|bait|prechorus|pre-chorus|pre|instrumental|inst|musik|ref)\.?:?$/i;
+const LABEL_BAGIAN = /^(intro|int|interlude|inter|reff?|refrain|reffrain|chorus|verse|bridge|outro|coda|ending|solo|bait|prechorus|pre-chorus|pre|instrumental|inst|musik|music|ref)\.?:?$/i;
 const FILLER = /^[.\-–—|:~*()\[\]xX×0-9,;]+$/;
 
 /* Memecah baris menjadi kata + posisi kolom awalnya.
    Chord yang ditulis menempel dengan tanda "-" (misal "C-G/B", "Gsus4-G",
-   "C-Dm-Em") dipecah menjadi beberapa chord, dan tiap bagian diberi
+   "C-Dm-Em") atau dengan titik ("Am..F..Am") dipecah menjadi beberapa chord, dan tiap bagian diberi
    nempel = true supaya tetap menempel saat ditranspose. */
 function pecahMenempel(teks) {
   const potong = [];
   let awal = 0;
   for (let i = 1; i < teks.length; i++) {
-    if (teks[i] === "-" && /[A-G]/.test(teks[i + 1] || "") && teks[i - 1] !== "(" && teks[i - 1] !== "-") {
+    const tanda = teks[i] === "-" && /[A-G]/.test(teks[i + 1] || "") && teks[i - 1] !== "(" && teks[i - 1] !== "-";
+    const habisTitik = teks[i - 1] === "." && /[A-G\-(]/.test(teks[i]);   // "Am..F..C"
+    if (tanda || habisTitik) {
       potong.push(teks.slice(awal, i));
       awal = i;
     }
